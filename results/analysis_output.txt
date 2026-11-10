@@ -1,0 +1,55 @@
+
+=== Experiment A: digits (100 runs; correction factor 1/J+0.333)
+LR   acc 0.966 conf(T=1) 0.949 | T* 0.82 [0.69,0.96] T*<1 in 94% | ECE 0.027->0.022 change -0.005 [-0.013,+0.002] improved 81/100 | NLL 0.119->0.118
+MLP  acc 0.970 conf(T=1) 0.984 | T* 1.60 [1.30,1.98] T*<1 in 1% | ECE 0.021->0.022 change +0.001 [-0.009,+0.011] improved 49/100 | NLL 0.168->0.137
+RF   acc 0.972 conf(T=1) 0.751 | T* 0.26 [0.22,0.32] T*<1 in 100% | ECE 0.222->0.018 change -0.204 [-0.217,-0.191] improved 100/100 | NLL 0.339->0.083
+order RF<LR<MLP in 100/100; Holm-adjusted p (RF-LR, LR-MLP, RF-MLP): ['1.7e-21', '2.7e-11', '4.1e-29']
+
+=== Experiment A: fashion (30 runs; correction factor 1/J+0.333)
+LR   acc 0.801 conf(T=1) 0.926 | T* 2.89 [2.62,3.18] T*<1 in 0% | ECE 0.125->0.036 change -0.089 [-0.113,-0.065] improved 30/30 | NLL 1.039->0.626
+MLP  acc 0.849 conf(T=1) 0.972 | T* 4.78 [4.38,5.21] T*<1 in 0% | ECE 0.123->0.021 change -0.102 [-0.114,-0.090] improved 30/30 | NLL 1.333->0.473
+RF   acc 0.851 conf(T=1) 0.741 | T* 0.58 [0.55,0.61] T*<1 in 100% | ECE 0.111->0.020 change -0.091 [-0.102,-0.081] improved 30/30 | NLL 0.479->0.414
+order RF<LR<MLP in 30/30; Holm-adjusted p (RF-LR, LR-MLP, RF-MLP): ['4.2e-24', '3.3e-11', '2.7e-30']
+
+=== Experiment A: cifar10 (5 runs; correction factor none)
+LR   acc 0.399 | T* 1.18 (range 1.14-1.21) | ECE 0.023->0.029 improved 1/5 | NLL 1.747->1.738
+MLP  acc 0.505 | T* 1.22 (range 1.16-1.29) | ECE 0.051->0.016 improved 5/5 | NLL 1.424->1.406
+RF   acc 0.474 | T* 0.55 (range 0.54-0.55) | ECE 0.174->0.025 improved 5/5 | NLL 1.636->1.517
+RF lowest in 5/5 runs; LR<MLP in 4/5 runs
+
+=== Experiment B, N=60 (4,000 steps)
+quench mean -28.13 [-28.42,-27.85] SD 1.01 gap to reference 2.06
+fast   mean -27.50 [-27.77,-27.22] SD 0.98 gap to reference 2.69
+slow   mean -29.08 [-29.41,-28.75] SD 1.15 gap to reference 1.11
+log    mean -28.68 [-29.02,-28.34] SD 1.20 gap to reference 1.51
+reference low energy (best of 200 long anneals + greedy descent): mean -30.19
+slow-fast: -1.58 [-1.70,-1.47] d_z -3.88 Holm p 1.3e-30 lower on 50/50
+log-fast: -1.18 [-1.33,-1.03] d_z -2.21 Holm p 4.9e-20 lower on 50/50
+slow-quench: -0.95 [-1.04,-0.85] d_z -2.81 Holm p 2.3e-24 lower on 50/50
+quench-fast: -0.64 [-0.74,-0.54] d_z -1.85 Holm p 4.3e-17 lower on 48/50
+log-quench: -0.55 [-0.68,-0.41] d_z -1.14 Holm p 2.7e-10 lower on 48/50
+slow-log: -0.40 [-0.50,-0.30] d_z -1.14 Holm p 2.7e-10 lower on 46/50
+16,000 steps: slow-log +0.20 [+0.10,+0.30], slow lower on 15/50
+16,000 steps: quench-fast -0.96 [-1.06,-0.85], quench lower on 50/50
+fast schedule mean energy: step 600 -27.22, step 4000 -27.50
+matrices where fast is significantly lower than quench (Welch, p<0.05): 0
+
+=== Experiment B, N=120
+mean energy per spin: quench -0.482 fast -0.470 slow -0.496 log -0.493
+slow-fast: -3.15 [-3.40,-2.90] d_z -3.55 Holm p 7.2e-29 lower on 50/50
+log-fast: -2.72 [-3.01,-2.44] d_z -2.70 Holm p 1.1e-23 lower on 50/50
+slow-quench: -1.68 [-1.88,-1.48] d_z -2.41 Holm p 1.3e-21 lower on 50/50
+quench-fast: -1.47 [-1.68,-1.25] d_z -1.92 Holm p 8.8e-18 lower on 50/50
+log-quench: -1.26 [-1.50,-1.01] d_z -1.46 Holm p 1.5e-13 lower on 49/50
+slow-log: -0.42 [-0.57,-0.28] d_z -0.82 Holm p 4.8e-07 lower on 40/50
+matrices where fast is significantly lower than quench (Welch, p<0.05): 0
+
+=== Experiment B, N=200
+mean energy per spin: quench -0.487 fast -0.476 slow -0.500 log -0.495
+slow-fast: -4.78 [-4.99,-4.57] d_z -6.53 Holm p 2.9e-41 lower on 50/50
+log-fast: -3.77 [-4.03,-3.51] d_z -4.12 Holm p 6.5e-32 lower on 50/50
+slow-quench: -2.59 [-2.78,-2.40] d_z -3.93 Holm p 4.8e-31 lower on 50/50
+quench-fast: -2.19 [-2.41,-1.97] d_z -2.84 Holm p 8.1e-25 lower on 50/50
+log-quench: -1.58 [-1.81,-1.35] d_z -1.94 Holm p 3.9e-18 lower on 50/50
+slow-log: -1.01 [-1.16,-0.85] d_z -1.86 Holm p 1.0e-17 lower on 47/50
+matrices where fast is significantly lower than quench (Welch, p<0.05): 0

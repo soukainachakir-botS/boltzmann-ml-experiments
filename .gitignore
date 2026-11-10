@@ -1,0 +1,4 @@
+__pycache__/
+data/fashion-mnist/
+data/CIFAR-10-images/
+data/*.npz

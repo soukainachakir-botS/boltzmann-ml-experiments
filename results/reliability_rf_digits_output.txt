@@ -1,0 +1,6 @@
+36000 pooled test predictions; pooled ECE: T=1 0.221, T=T* per split 0.004
+floor 1e-06: geometric mean T* = 0.263
+floor 0.0001: geometric mean T* = 0.263
+floor 0.01: geometric mean T* = 0.263
+raw T=1 bins (mean confidence, accuracy), bins with >=20 predictions: (0.242,0.402) (0.301,0.583) (0.369,0.744) (0.436,0.918) (0.501,0.970) (0.568,0.995) (0.635,1.000) (0.701,1.000) (0.768,1.000) (0.835,1.000) (0.901,1.000) (0.964,1.000)
+calibrated T* bins (mean confidence, accuracy), bins with >=20 predictions: (0.377,0.375) (0.437,0.477) (0.506,0.464) (0.568,0.516) (0.634,0.560) (0.701,0.672) (0.767,0.717) (0.836,0.829) (0.906,0.904) (0.996,0.998)
