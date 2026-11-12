@@ -63,6 +63,7 @@ def mlp_logits(Xtr,ytr,Xs,seed,epochs=100,bs=32,lr=1e-3):
                 for P,g,m,v in ((W,gw,mW,vW),(b,gb,mb,vb)):
                     m[i]=0.9*m[i]+0.1*g; v[i]=0.999*v[i]+0.001*g*g
                     P[i]-=lr*(m[i]/(1-0.9**t))/(np.sqrt(v[i]/(1-0.999**t))+1e-8)
+        if CFG.get('on_epoch'): CFG['on_epoch'](ep+1,lambda X: np.maximum(np.maximum(X@W[0]+b[0],0)@W[1]+b[1],0)@W[2]+b[2])
     def f(X): return np.maximum(np.maximum(X@W[0]+b[0],0)@W[1]+b[1],0)@W[2]+b[2]
     return [f(X) for X in Xs]
 OFFICIAL=None
@@ -99,7 +100,7 @@ def run_split(X,y,s,nsub):
     return rows,curves
 if __name__=='__main__':
     name,ns,nsub,tag=sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),sys.argv[4]
-    if name=='cifar10': CFG.update({'C':0.01,'epochs':30,'wd':5e-4})
+    if name=='cifar10': CFG.update({'C':0.001,'epochs':30,'wd':5e-4})   # selected on validation data only, see select_cifar10_settings.py
     if name=='cifar10':
         d=np.load('data/cifar10_official.npz'); OFFICIAL=(d['Xtr'].astype(float),d['ytr'],d['Xte'].astype(float),d['yte']); X=y=None
     else:

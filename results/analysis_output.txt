@@ -12,10 +12,13 @@ RF   acc 0.851 conf(T=1) 0.741 | T* 0.58 [0.55,0.61] T*<1 in 100% | ECE 0.111->0
 order RF<LR<MLP in 30/30; Holm-adjusted p (RF-LR, LR-MLP, RF-MLP): ['4.2e-24', '3.3e-11', '2.7e-30']
 
 === Experiment A: cifar10 (5 runs; correction factor none)
-LR   acc 0.399 | T* 1.18 (range 1.14-1.21) | ECE 0.023->0.029 improved 1/5 | NLL 1.747->1.738
-MLP  acc 0.505 | T* 1.22 (range 1.16-1.29) | ECE 0.051->0.016 improved 5/5 | NLL 1.424->1.406
-RF   acc 0.474 | T* 0.55 (range 0.54-0.55) | ECE 0.174->0.025 improved 5/5 | NLL 1.636->1.517
-RF lowest in 5/5 runs; LR<MLP in 4/5 runs
+LR   acc 0.414 | T* 1.02 (range 0.99-1.06) | ECE 0.028->0.033 improved 1/5 | NLL 1.707->1.707
+MLP  acc 0.500 | T* 1.27 (range 1.25-1.28) | ECE 0.063->0.016 improved 5/5 | NLL 1.432->1.408
+RF   acc 0.477 | T* 0.54 (range 0.53-0.55) | ECE 0.176->0.023 improved 5/5 | NLL 1.629->1.508
+RF lowest in 5/5 runs; LR<MLP in 5/5 runs
+sensitivity, LR with C=0.01: T* 1.19 (range 1.16-1.23); below MLP in 5/5 runs
+selected on validation data, LR: C=0.001 (validation accuracy 0.413)
+selected on validation data, MLP: wd=0.0005, epochs=30 (validation accuracy 0.512)
 
 === Experiment B, N=60 (4,000 steps)
 quench mean -28.13 [-28.42,-27.85] SD 1.01 gap to reference 2.06

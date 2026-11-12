@@ -23,7 +23,13 @@ def experiment_a(tag, ratio):
               f'improved {(x>0).sum()}/{J} | NLL {g.nll1.mean():.3f}->{g.nllT.mean():.3f}')
     p=d.pivot(index='split',columns='model',values='Tstar')
     if not ratio:
-        print(f'RF lowest in {((p.RF<p.LR)&(p.RF<p.MLP)).sum()}/{J} runs; LR<MLP in {(p.LR<p.MLP).sum()}/{J} runs'); return
+        print(f'RF lowest in {((p.RF<p.LR)&(p.RF<p.MLP)).sum()}/{J} runs; LR<MLP in {(p.LR<p.MLP).sum()}/{J} runs')
+        q=pd.read_csv('results/cifar10_lr_sensitivity.csv').set_index('split').Tstar
+        print(f'sensitivity, LR with C=0.01: T* {np.exp(np.log(q).mean()):.2f} (range {q.min():.2f}-{q.max():.2f}); below MLP in {(q<p.MLP).sum()}/{J} runs')
+        sel=pd.read_csv('results/cifar10_selection.csv')
+        for m in ('LR','MLP'):
+            r=sel[sel.model==m]; r=r.loc[r.val_acc.idxmax()]; print(f'selected on validation data, {m}: {r.setting} (validation accuracy {r.val_acc:.3f})')
+        return
     order=((p.RF<p.LR)&(p.LR<p.MLP)).sum(); ps=[]
     for a,b in (('RF','LR'),('LR','MLP'),('RF','MLP')):
         x=np.log(p[a])-np.log(p[b]); ps.append(2*stats.t.sf(abs(x.mean()/(x.std(ddof=1)*f)),J-1))
